@@ -27,10 +27,15 @@ const Login = async (req, res) => {
             const token = await user.generateAuthToken();
             res.cookie('jwtoken', token, {
                 expires: new Date(Date.now() + 25892000000),
+                httpOnly: true,
+                secure: true,
                 sameSite: 'None'
             });
             res.cookie('userData', user._id, {
                 expires: new Date(Date.now() + 25892000000),
+                httpOnly: true,
+                secure: true,
+                sameSite: 'None'
             });
             res.status(200).json({ message: 'user login successfully...!!!' });
         }
@@ -39,13 +44,13 @@ const Login = async (req, res) => {
     }
 };
 
-const GetUserById = async(req, res) =>{
+const GetUserById = async (req, res) => {
     try {
         const userdata = await UserSchema.findById(req.params.id);
         res.status(200).json(userdata);
     } catch (error) {
         res.status(400).json('User Not Found');
-        
+
     }
 };
 module.exports = { SaveUSer, Login, GetUserById };
