@@ -27,15 +27,11 @@ const Login = async (req, res) => {
             const token = await user.generateAuthToken();
             res.cookie('jwtoken', token, {
                 expires: new Date(Date.now() + 25892000000),
-                httpOnly: false,
-                secure: true,
-                sameSite: 'None'
+                secure: true    
             });
             res.cookie('userData', user._id, {
                 expires: new Date(Date.now() + 25892000000),
-                httpOnly: true,
-                secure: true,
-                sameSite: 'None'
+                secure: true
             });
             res.status(200).json({ message: 'user login successfully...!!!' });
         }
