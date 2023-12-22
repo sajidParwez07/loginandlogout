@@ -25,17 +25,19 @@ const Login = async (req, res) => {
         }
         else {
             const token = await user.generateAuthToken();
-            res.cookie('jwtoken', token, {
-                expires: new Date(Date.now() + 25892000000),
-                httpOnly: true,
-                sameSite: 'None'  
-            });
-            res.cookie('userData', user._id, {
-                expires: new Date(Date.now() + 25892000000),
-                httpOnly: true,
-                sameSite: 'None'
-            });
-            res.status(200).json({ message: 'user login successfully...!!!' });
+            // res.cookie('jwtoken', token, {
+            //     expires: new Date(Date.now() + 25892000000),
+            //     httpOnly: true,
+            //     secure: true ,
+            //     path:'/' 
+            // });
+            // res.cookie('userData', user._id, {
+            //     expires: new Date(Date.now() + 25892000000),
+            //     httpOnly: true,
+            //     secure: true,
+            //     path:'/' 
+            // });
+            res.status(200).json({ message: 'user login successfully...!!!', token, user });
         }
     } catch (error) {
         res.status(400).json({ message: error.message });
